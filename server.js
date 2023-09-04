@@ -12,7 +12,7 @@ app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -25,5 +25,4 @@ db.once('open', () => console.log('Connected to DataBase'))
 //##################################################
 
 app.use('/', indexRouter)
-
 app.listen(process.env.PORT || 3000)
