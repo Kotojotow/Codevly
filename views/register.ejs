@@ -1,7 +1,7 @@
 <!-- partial:index.partial.html -->
 <div class="screen-1">
-    <form action="/" method="POST">
-        <svg class="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="300" height="300" viewbox="0 0 640 480" xml:space="preserve">
+
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="300" height="300" viewbox="0 0 640 480" xml:space="preserve">
     <g transform="matrix(3.31 0 0 3.31 320.4 240.4)">
       <circle style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(61,71,133); fill-rule: nonzero; opacity: 1;" cx="0" cy="0" r="40"></circle>
     </g>
@@ -21,6 +21,7 @@
       <polygon style="stroke: rgb(0,0,0); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" points="-50,-50 -50,50 50,50 50,-50 "></polygon>
     </g>
   </svg>
+    <form action="/register" method="POST">
         <div class="email">
             <label for="email">Email Address</label>
             <div class="sec-2">
@@ -36,8 +37,15 @@
                 <ion-icon class="show-hide" name="eye-outline"></ion-icon>
             </div>
         </div>
-        <button class="login" onclick="RegisterButton()">Login </button>
-        <div class="footer"><span onclick="RegisterButton()"> Signup</span><span>Forgot Password?</span></div>
+        <div class="password">
+            <label for="password">Repeat Password</label>
+            <div class="sec-2">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+                <input class="pas" type="password" name="repeatpassword" placeholder="············" />
+                <ion-icon class="show-hide" name="eye-outline"></ion-icon>
+            </div>
+        </div>
+        <button class="login" onclick="GoToRegister()">Register </button>
     </form>
 </div>
 <!-- partial -->
