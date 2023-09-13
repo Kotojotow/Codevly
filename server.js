@@ -4,20 +4,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express')
 const app = express()
-const expressLayouts = require('express-ejs-layouts')
 
 //Routes
 
 const indexRouter = require('./routes/index')
-const registerRouter = require('./routes/register')
-
-//Views
-
-app.set('view engine', 'ejs')
-app.set('views', __dirname + '/views')
-app.set('layout', 'layouts/layout')
-app.use(expressLayouts)
-app.use(express.static(__dirname + '/public'))
 
 //DataBase
 
@@ -30,6 +20,12 @@ db.once('open', () => console.log('Connected to DataBase'))
 //Apps
 
 app.use('/', indexRouter)
-app.use('/register', registerRouter)
 
 app.listen(process.env.PORT || 3000)
+
+
+
+
+
+
+// npm run devstart

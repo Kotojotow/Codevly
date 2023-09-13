@@ -4,9 +4,15 @@ const AuthController = require('../controllers/auth_controller')
 
 router.use(express.urlencoded({ extended: false }))
 
-router.get('/', (req, res) => {
-    res.render('index')
-})
-
 router.post("/login", AuthController.login)
+
+// router.post('/register', AuthController.register)
+
+router
+    .route("/register")
+    .get((req,res ) => {
+        res.json({message:"get register"})
+    })
+    .post(AuthController.register)
+
 module.exports = router

@@ -1,27 +1,47 @@
 const User = require('../models/user_model')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const register = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
-        if (err) {
-            res.json({ error: err })
+const register = async(req, res, next) => {
+
+        console.log(req.body.email)
+        if (!req.body.email){ res.json({ message: "Provide_email" })
+            return
         }
+        if (!req.body.password){ res.json({ message: "Provide_password" })
+            return
+        }
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
         let user = new User({
             email: req.body.email,
-            password: hashedPass
+            password: hashedPassword
         })
         user.save()
-            .then(user => {
-                res.json({ message: "User added Successfully!" })
-            })
-            .catch(error => {
-                res.json({ message: "An error occured" })
-            })
-    })
+        res.json({ message: "User added Successfully!" })
+
+
 }
 
-const login = (req, res, next => {
+// const register = (req, res, next) => {
+//     bcrypt.hash(req.body.password, 10, function(err, hashedPass) {
+//         if (err) {
+//             res.json({ error: err })
+//         }
+//         let user = new User({
+//             email: req.body.email,
+//             password: hashedPass
+//         })
+//         user.save()
+//             .then(user => {
+//                 res.json({ message: "User added Successfully!" })
+//             })
+//             .catch(error => {
+//                 res.json({ message: "An error occured" })
+//             })
+//     })
+// }
+
+const login = (req, res, next) => {
     var email = req.body.email
     var password = req.body.password
 
@@ -42,10 +62,9 @@ const login = (req, res, next => {
                         res.json({ message: 'Password does not matched!' })
                     }
                 })
-            } else {
-                res.json({ message: 'No user found!' })
-            }
+            } else { res.json({ message: 'No user found!' }) }
         })
-})
+}
+
 
 module.exports = { register, login }
