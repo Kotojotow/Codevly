@@ -15,4 +15,8 @@ router
     })
     .post(AuthController.register)
 
+router
+    .route("/login")
+    .get(AuthController.login)
+
 module.exports = router
