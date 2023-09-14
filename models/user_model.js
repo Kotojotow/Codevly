@@ -11,6 +11,17 @@ const UserSchema = new Mongoose.Schema({
         type: String,
         minlength: 6,
         required: true,
+    },
+    chatID:{
+        type: String,
+        require: true
+    },
+    DateOfRegister:{
+        type: Date
+    },
+    AdminFlag:{
+        type: Boolean,
+        default: false
     }
 })
 

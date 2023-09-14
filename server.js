@@ -21,5 +21,5 @@ app.use(express.json());
 app.use('/', indexRouter)
 app.use('/chat', chatRouter)
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.APP_PORT || 3000)
 // npm run devstart
