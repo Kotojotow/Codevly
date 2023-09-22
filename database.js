@@ -16,4 +16,4 @@ async function createCollection(collectionName) {
     }
   }
 
-module.exports = {createCollection,runDB}
+module.exports = {createCollection,runDB,mongoose}

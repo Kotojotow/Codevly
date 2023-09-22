@@ -20,3 +20,4 @@ router
     .get(AuthController.login)
 
 module.exports = router
+

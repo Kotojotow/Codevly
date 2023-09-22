@@ -1,4 +1,3 @@
-const { default: mongoose } = require("mongoose")
 const Mongoose = require("mongoose")
 
 const LogSchema = new Mongoose.Schema({
@@ -22,7 +21,7 @@ const LogSchema = new Mongoose.Schema({
     }
 })
 
-const Log = mongoose.model('Logs', LogSchema)
+const Log = Mongoose.model('Logs', LogSchema)
 
 const newLog = (EventType, User, Succeed = false, Reason) =>{
     let IfSucceed = () =>{

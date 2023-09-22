@@ -4,9 +4,7 @@ const chatController = require('../controllers/chat_controller')
 
 router
     .route("/")
-    .get((req,res ) => {
-        res.json({message:"get register"})
-    })
+    .post(chatController.add_message)
 
 
 module.exports = router
