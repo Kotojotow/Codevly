@@ -1,2 +1,5 @@
 .env
 node_modules
+controllers/auth_controller.js
+backup
+mongodump.exe

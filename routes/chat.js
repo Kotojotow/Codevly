@@ -4,7 +4,8 @@ const chatController = require('../controllers/chat_controller')
 
 router
     .route("/")
-    .post(chatController.add_message)
+    .post(chatController.addMessage)
+    .get(chatController.showMessage)
 
 
 module.exports = router

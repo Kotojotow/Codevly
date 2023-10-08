@@ -40,25 +40,6 @@ const new_user = (req, res, next) => {
         })
 }
 
-
-// Update
-// const update = (req,res,next) => {
-//     let userID = req.body.userID
-
-//     let updatedData = {
-//         email: req.body.email,
-//         password: req.body.password
-//     }
-
-//     User.findByIdAndUpdate(userID, {$set:updatedData})
-//     .then(() => {
-//         res.json({message: 'User Updated Successfully!' })
-//     })
-//     .catch(error =>{
-//         res.json({message: "An error occured"})
-//     })
-// }
-
 const destroy = (req, res, next) => {
     let userID = req.body.userID
     User.findOneAndRemove(userID)
