@@ -6,6 +6,7 @@ router
     .route("/")
     .post(chatController.addMessage)
     .get(chatController.showMessage)
+    .delete(chatController.deleteMessage)
 
 
 module.exports = router

@@ -29,13 +29,13 @@ cron.schedule('0 23 * * *', () => {
     if (!fs.existsSync(backupDirectory)) {
       fs.mkdirSync(backupDirectory)
     }
-    console.log('Rozpoczęcie codziennego backupu o 23:00')
+    console.log('Initialization of daily backup 23:00')
     exec(`mongodump --out ${backupDirectory}`, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Błąd: ${error}`)
+        console.error(`Error: ${error}`)
         Log.newLog("DB Backup","System", false, error)
       } else {
-        console.log(`Backup zakończony: ${stdout}`)
+        console.log(`Backup ended Successfully: ${stdout}`)
         Log.newLog("DB Backup","System", true,backupDirectory)
       }
     })
