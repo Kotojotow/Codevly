@@ -1,7 +1,7 @@
 const db = require('../database')
 const chatModel = require('../models/message_model')
+const removedChat = require('../models/removed_message_model')
 const Log = require('../models/log_model')
-const {ObjectId} = require('mongoose')
 
 const addMessage = async (req,res,next) => {
     try{
@@ -11,7 +11,8 @@ const addMessage = async (req,res,next) => {
 
         let nowyRekord = new Collection({
             content: Content,
-            user: true
+            user: true,
+            date: Date.now()
         })
         
         await nowyRekord.save()
@@ -48,11 +49,21 @@ const deleteMessage = async (req,res,next) => {
     const CollectionName = "chat_" + req.body.email
 
     const Collection = db.mongoose.model(CollectionName, chatModel.MessageSchema,CollectionName)
+    const record1 = await Collection.findById(req.body.id)
     const record = await Collection.findByIdAndRemove(req.body.id)
     if (!record)
         res.json({ message: "couldnt find message" })
-    else
+    else{
         res.json({ message: "Message removed" })
+        const Collection1 = db.mongoose.model("removedMessages", removedChat.removedMessageSchema,"removedMessages")
+        let nowyRekord = new Collection1({
+            content: record1.content,
+            user: req.body.email,
+            date: record1.date,
+            image: record1.Image
+        })
+        await nowyRekord.save()
+    }
     }
     catch(error){
         res.json({ message: error })
