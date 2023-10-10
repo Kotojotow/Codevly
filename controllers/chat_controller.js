@@ -17,13 +17,12 @@ const addMessage = async (req,res,next) => {
         
         await nowyRekord.save()
         res.json({ message: `${Content} add to ${CollectionName} ` })
-        Log.newLog("New Message",req.body.email,true,"succesfull")
+        Log.newLog("New Message",req.body.email,true,nowyRekord.content)
     }
     catch(error){
         res.json({ message: error })
         console.error(error)
         Log.newLog("New Message",req.body.email,false,error)
-        
     }
 }
 
@@ -36,11 +35,12 @@ const showMessage = async (req,res,next) => {
         const records = await Collection.find().limit(AmountOfMessages)
         
         res.json({ message: records })
+        Log.newLog("EnterToChat",req.body.email,true)
     }
     catch(error){
         res.json({ message: error })
         console.error(error)
-        
+        Log.newLog("EnterToChat",req.body.email,false,error)       
     }
 }
 
@@ -63,11 +63,14 @@ const deleteMessage = async (req,res,next) => {
             image: record1.Image
         })
         await nowyRekord.save()
+        Log.newLog("MessageDelete",req.body.email,true,record1.content)
     }
     }
     catch(error){
         res.json({ message: error })
         console.error(error)
+        Log.newLog("MessageDelete",req.body.email,false,error)
+
     }
 }
 module.exports ={ addMessage, showMessage, deleteMessage}

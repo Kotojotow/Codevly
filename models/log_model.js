@@ -25,7 +25,7 @@ const Log = Mongoose.model('Logs', LogSchema)
 
 const newLog = (EventType, User, Succeed = false, Reason) =>{
     let IfSucceed = () =>{
-        if(Succeed){return "Succeed"}
+        if(Succeed == true && Reason == undefined){return "Succeed"}
         else{return Reason}
     }
 

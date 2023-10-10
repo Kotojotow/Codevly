@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const AuthController = require('../controllers/auth_controller')
+const UserController = require('../controllers/user_controller')
 
 router.use(express.urlencoded({ extended: false }))
 
@@ -10,14 +11,17 @@ router.post("/login", AuthController.login)
 
 router
     .route("/register")
-    .get((req,res ) => {
-        res.json({message:"get register"})
-    })
     .post(AuthController.register)
 
 router
     .route("/login")
     .get(AuthController.login)
+
+router
+    .route("/user")
+    .get(UserController.userGet)
+    .put()
+    .delete(UserController.userDelete)
 
 module.exports = router
 

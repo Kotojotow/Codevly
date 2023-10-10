@@ -1,54 +1,40 @@
 const { response } = require('express')
 const User = require('../models/user_model')
+const Log = require('../models/log_model')
 
-const index = (req, res, next) => {
-    User.find()
-        .then(response => {
-            res.json({
-                response
-            })
-        })
-        .catch(error => {
-            res.json({
-                message: "An error occured"
-            })
-        })
+const userGet = async (req,res,next)    => {
+    try{
+        const records = await User.find({},{password: 0,_id: 0,__v: 0})
+        res.json({message: records})
+        Log.newLog("GetAllUsersData",req.body.email,true)
+    }
+    catch(error){
+        console.error(error)
+        res.json({message: error})
+        Log.newLog("GetAllUsersData",req.body.email,false,error)
+    }
 }
-
-const show = (req, res, next) => {
-    let userid = req.body.userid
-    User.FindById(userid)
-        .then(response => {
-            res.json({ response })
-        })
-        .catch(error => {
-            res.json({ message: "An error occured" })
-        })
+// const userPut = async (req,res,next) => {
+//     try{
+//         const email = req.body.email
+//         const Record = await User.findOneAndUpdate({ email: email},{})
+//     }
+//     catch(error){
+//         console.error(error)
+//         res.json({message: error})
+//         Log.newLog("UserChangeData",req.body.email,false,error)
+//     }
+// }
+const userDelete = async (req,res,next) => {
+    try{
+        const email = req.body.email
+        const Record = await User.findOneAndRemove({ email: email})
+        Log.newLog("UserDelete",req.body.email,true)
+    }
+    catch(error){
+        console.error(error)
+        res.json({message: error})
+        Log.newLog("UserDelete",req.body.email,false,error)
+    }
 }
-
-const new_user = (req, res, next) => {
-    let user = new User({
-        email: req.body.email,
-        password: req.body.password
-    })
-    user.save()
-        .then(response => {
-            res.json({ message: 'User Added Successfully!' })
-        })
-        .catch(error => {
-            res.json({ message: "An error occured" })
-        })
-}
-
-const destroy = (req, res, next) => {
-    let userID = req.body.userID
-    User.findOneAndRemove(userID)
-        .then(response => {
-            res.json({ message: 'User Deleted Successfully!' })
-        })
-        .catch(error => {
-            res.json({ message: "An error occured" })
-        })
-}
-
-module.exports = { index, new_user, show, destroy }
+module.exports = { userGet, userDelete }
